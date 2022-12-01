@@ -13,6 +13,7 @@ type SignerContextType = {
     address?: string;
     loading: boolean;
     connectWallet: () => Promise<void>;
+    disconnectWallet: () => void;
 };
 
 const SignerContext = createContext<SignerContextType>({} as any);
@@ -23,18 +24,18 @@ export const SignerProvider = ({ children }: { children: ReactNode }) => {
     const [signer, setSigner] = useState<JsonRpcSigner>();
     const [address, setAddress] = useState<string>();
     const [loading, setLoading] = useState(false);
+    const web3modal = new Web3Modal({ cacheProvider: true });
 
     useEffect(() => {
-        const web3modal = new Web3Modal();
+        console.log("effect" ,web3modal.cachedProvider )
         if (web3modal.cachedProvider) connectWallet();
         window.ethereum.on("accountsChanged", connectWallet);
     }, []);
 
     const connectWallet = async () => {
-        console.log("click connect wallet");
         setLoading(true);
         try {
-            const web3modal = new Web3Modal({ cacheProvider: true });
+            console.log("before connectWallet",web3modal.cachedProvider);
             const instance = await web3modal.connect();
             const provider = new Web3Provider(instance);
             const signer = provider.getSigner();
@@ -47,7 +48,20 @@ export const SignerProvider = ({ children }: { children: ReactNode }) => {
         setLoading(false);
     };
 
-    const contextValue = { signer, address, loading, connectWallet };
+    const disconnectWallet = async () => {
+        setLoading(true);
+        try {
+            web3modal.clearCachedProvider();
+            setSigner(undefined);
+            setAddress(undefined);
+        } catch (e) {
+            console.log(e);
+        }
+        setLoading(false);
+    };
+
+
+    const contextValue = { signer, address, loading, connectWallet, disconnectWallet };
 
     return (
         <SignerContext.Provider value={contextValue}>
