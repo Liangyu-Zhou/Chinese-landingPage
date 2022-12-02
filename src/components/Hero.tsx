@@ -8,7 +8,7 @@ const Hero = () => {
   const { address, loading, connectWallet, disconnectWallet } = useSigner();
   return (
     <div className='text-white bg-[#222222]'>
-      <div className='max-w-[800px] mt-[-96px] w-full h-screen mx-auto text-center flex flex-col justify-center'>
+      <div className='mt-[-96px] w-full h-screen mx-auto text-center flex flex-col justify-center'>
         <p className='text-white font-bold p-2'>TOKENIZED CONTENT SHARING PLATFORM</p>
         <h1 className='text-[#F26C4F] md:text-7xl sm:text-6xl text-4xl font-bold md:py-6'>Chinese.org</h1>
         <div className='flex justify-center items-center'>
@@ -25,13 +25,13 @@ const Hero = () => {
         <p className='md:text-2xl text-xl font-bold text-gray-500'>Share your creations to increase revenue for ETH, MATIC and other token.</p>
         <div className='flex justify-center w-full'>
           {address && <AddressAvatar address={address}></AddressAvatar>}
-          <p className="pl-10 flex h-10 items-center mt-3">token balance: 0</p> 
+          {address && <p className="pl-10 flex h-10 items-center mt-3">token balance: 0</p> }
         </div>
         
         <div className='flex justify-center w-full'>
 
           <img className="flex w-10 h-10 items-center mt-3" src={metamaskImg} alt=""></img>
-          <button className='bg-[#2c2c2c] w-[400px] rounded-md font-medium my-1 py-3 text-[#F26C4F] font-semibold' disabled={loading} onClick={connectWallet}>
+          <button className='bg-[#2c2c2c] w-[400px] rounded-md font-medium my-1 py-3 text-[#F26C4F]' disabled={loading} onClick={connectWallet}>
             {address ? "Logged In" : loading ? "Connecting..." : "Login with Metamask"}
           </button>
         </div>
