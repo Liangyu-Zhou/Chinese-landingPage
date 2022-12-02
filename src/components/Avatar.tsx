@@ -13,7 +13,7 @@ const minifyAddress = (address: string) => {
 const AddressAvatar = ({ address }: AddressAvatarProps) => {
     const shortAddress = useMemo(() => minifyAddress(address), [address]);
 
-    return (<div className="flex h-10 items-center mx-auto mt-3">
+    return (<div className="flex h-10 items-center mt-3">
         <Blockies seed={address.toLowerCase()} className="mr-2 rounded-md"></Blockies>
         <span>{shortAddress}</span>
     </div>);
