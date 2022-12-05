@@ -9,7 +9,6 @@ const Timeline = () => {
 
 
                     <div className="mb-8 flex justify-between mx-auto items-center w-9/12 right-timeline">
-                        {/* <div className="order-1  bg-[#222222] w-5/12 rounded-lg shadow-xl"></div> */}
                         <div className="order-1 w-5/12 px-6 py-4 "></div>
                         <div className="order-2 rounded-lg w-2/12 px-6 py-4 hover:scale-105">
                             <div className="z-20 flex mx-auto items-center order-1 bg-[#2c2c2c] shadow-2xl w-30 h-8 rounded-lg">
